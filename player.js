@@ -10,7 +10,7 @@ export class Player {
         this.idleImage = document.getElementById('idlePlayer');
     }
     update() {
-        this.position.x++;
+        // this.position.x++;
     }
     draw(context) {
         context.drawImage(this.idleImage, 0, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height)
