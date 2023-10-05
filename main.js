@@ -3,8 +3,8 @@ import { Player } from "./player.js";
 window.addEventListener('load', function() {
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth - 15;
-    canvas.height = window.innerHeight - 15;
+    canvas.width = window.innerWidth - 250;
+    canvas.height = window.innerHeight - 300;
 
     class Game {
         constructor(width, height) {
@@ -13,7 +13,7 @@ window.addEventListener('load', function() {
             this.player = new Player(this);
         }
         update() {
-
+            this.player.update();
         }
         draw(context) {
             this.player.draw(context);
@@ -23,6 +23,8 @@ window.addEventListener('load', function() {
     const game = new Game(canvas.width, canvas.height);
     
     function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        game.update();
         game.draw(ctx);
         requestAnimationFrame(animate);
     }
