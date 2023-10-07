@@ -6,8 +6,9 @@ export class Player {
         this.position = {
             x: 200,
             y: this.game.height - this.height
-        }
-        this.image = '';
+        };
+        this.vy = 0;
+        this.weight = 1;
         this.idleImage = document.getElementById('idlePlayer');
         this.speed = 0;
         this.maxSpeed = 7;
@@ -21,11 +22,17 @@ export class Player {
 
         if (this.position.x < 100) this.position.x = 100;
         if (this.position.x > 450) this.position.x = this.position.x = 450;
-        
-        // vertical movement
 
+        // vertical movement
+        if (input.includes('w') && this.onGround()) this.vy -= 20;
+        this.position.y += this.vy;
+        if (!this.onGround()) this.vy += this.weight;
+        else this.vy = 0;
     }
     draw(context) {
         context.drawImage(this.idleImage, 0, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height)
+    }
+    onGround() {
+        return this.position.y >= this.game.height - this.height;
     }
 }
