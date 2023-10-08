@@ -25,6 +25,8 @@ export class Sitting extends State {
     handleInput(input) {
         if(input.includes('a') || input.includes('d')) {
             this.player.setState(states.RUNNING);
+        } else if(input.includes('w')) {
+            this.player.setState(states.JUMPING);
         }
     }
 }
@@ -37,14 +39,13 @@ export class Running extends State {
     enter() {
         this.player.createImage('./../img/Knight_1/Run.png');
         this.player.width = 70;
-        // this.player.frameX = 0;
         this.player.maxFrame = 6;
     }
     handleInput(input) {
-        if(input.includes('s')) {
-            this.player.setState(states.SITTING);
-        } else if(input.includes('w')) {
+        if(input.includes('w')) {
             this.player.setState(states.JUMPING);
+        } else if(!input.includes('a') && !input.includes('d')) {
+            this.player.setState(states.SITTING);
         }
     }
 }
@@ -55,14 +56,13 @@ export class Jumping extends State {
         this.player = player;
     }
     enter() {
-        if (this.player.onGround()) this.player.vy -= 20;
+        if (this.player.onGround()) this.player.velocity.y -= 20;
         this.player.createImage('./../img/Knight_1/Jump1.png');
         this.player.width = 80;
         this.player.maxFrame = 0;
-        // this.player.frameX = 0;
     }
     handleInput(input) {
-        if(this.player.vy > this.player.weight) {
+        if(this.player.velocity.y > this.player.weight) {
             this.player.setState(states.FALLING);
         }
     }
@@ -74,15 +74,14 @@ export class Falling extends State {
         this.player = player;
     }
     enter() {
-        if (this.player.onGround()) this.player.vy -= 20;
+        if (this.player.onGround()) this.player.velocity.y -= 20;
         this.player.createImage('./../img/Knight_1/Falling.png');
         this.player.width = 80;
         this.player.maxFrame = 0;
-        // this.player.frameX = 3;
     }
     handleInput(input) {
         if(this.player.onGround()) {
-            this.player.setState(states.RUNNING);
+            this.player.setState(states.SITTING);
         }
     }
 }

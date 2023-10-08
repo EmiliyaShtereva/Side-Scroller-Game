@@ -9,16 +9,19 @@ export class Player {
             x: 200,
             y: this.game.height - this.height
         };
-        this.vy = 0;
+        this.velocity = {
+            x: 0,
+            y: 0
+        }
+        this.scrollOffset = 0;
         this.weight = 1;
         this.image;
         this.frameX = 0;
         this.maxFrame;
         this.fps = 16;
-        this.frameInterval = 1000/this.fps;
+        this.frameInterval = 1000 / this.fps;
         this.frameTimer = 0;
-        this.speed = 0;
-        this.maxSpeed = 7;
+        this.speed = 7;
         this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this),];
         this.currentState = this.states[0];
         this.currentState.enter();
@@ -26,18 +29,24 @@ export class Player {
     update(input, deltaTime) {
         this.currentState.handleInput(input);
         // horizontal movement
-        this.position.x += this.speed;
-        if (input.includes('d')) this.speed = this.maxSpeed;
-        else if (input.includes('a')) this.speed = -this.maxSpeed;
-        else this.speed = 0;
+        this.position.y += this.velocity.y;
+        this.position.x += this.velocity.x;
 
-        if (this.position.x < 100) this.position.x = 100;
-        if (this.position.x > 450) this.position.x = this.position.x = 450;
+        if (input.includes('d') && this.position.x < 450) { 
+            this.velocity.x = this.speed; 
+        } else if ((input.includes('a') && this.position.x > 100) || 
+                    (input.includes('a') && this.scrollOffset === 0 && this.position.x > 0)) { 
+            this.velocity.x = -this.speed; 
+        } else {
+            this.velocity.x = 0;
+        }
+
+        if (input.includes('d')) this.scrollOffset += this.speed;
+        else if (input.includes('a') && this.scrollOffset > 0) this.scrollOffset -= this.speed;
 
         // vertical movement
-        this.position.y += this.vy;
-        if (!this.onGround()) this.vy += this.weight;
-        else this.vy = 0;
+        if (!this.onGround()) this.velocity.y += this.weight;
+        else this.velocity.y = 0;
 
         // sprite animation
         if (this.frameTimer > this.frameInterval) {
