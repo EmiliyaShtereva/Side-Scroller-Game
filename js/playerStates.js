@@ -20,6 +20,7 @@ export class Sitting extends State {
     enter() {
         this.player.createImage('./../img/Knight_1/Idle.png');
         this.player.width = 67;
+        this.player.height = 66;
         this.player.maxFrame = 3;
     }
     handleInput(input) {
@@ -38,7 +39,8 @@ export class Running extends State {
     }
     enter() {
         this.player.createImage('./../img/Knight_1/Run.png');
-        this.player.width = 70;
+        this.player.width = 69;
+        this.player.height = 66;
         this.player.maxFrame = 6;
     }
     handleInput(input) {
@@ -56,14 +58,19 @@ export class Jumping extends State {
         this.player = player;
     }
     enter() {
-        if (this.player.onGround()) this.player.velocity.y -= 20;
+        if (this.player.onGround() || this.player.velocity.y === 0) this.player.velocity.y -= 20;
         this.player.createImage('./../img/Knight_1/Jump1.png');
         this.player.width = 80;
+        this.player.height = 66;
         this.player.maxFrame = 0;
     }
     handleInput(input) {
         if(this.player.velocity.y > this.player.weight) {
             this.player.setState(states.FALLING);
+        } else if(!this.player.onGround() && this.player.velocity.y === 0) {
+            this.player.setState(states.FALLING);
+        } else if(this.player.velocity.y === 0) {
+            this.player.setState(states.SITTING);
         }
     }
 }
@@ -76,11 +83,12 @@ export class Falling extends State {
     enter() {
         if (this.player.onGround()) this.player.velocity.y -= 20;
         this.player.createImage('./../img/Knight_1/Falling.png');
-        this.player.width = 80;
+        this.player.width = 79;
+        this.player.height = 66;
         this.player.maxFrame = 0;
     }
     handleInput(input) {
-        if(this.player.onGround()) {
+        if(this.player.onGround() || this.player.velocity.y === 0) {
             this.player.setState(states.SITTING);
         }
     }

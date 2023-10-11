@@ -4,7 +4,7 @@ export class Player {
     constructor(game) {
         this.game = game;
         this.width;
-        this.height = 86;
+        this.height = 66;
         this.position = {
             x: 200,
             y: this.game.height - this.height
@@ -14,14 +14,14 @@ export class Player {
             y: 0
         }
         this.scrollOffset = 0;
-        this.weight = 1;
+        this.weight = 1.5;
         this.image;
         this.frameX = 0;
         this.maxFrame;
         this.fps = 16;
         this.frameInterval = 1000 / this.fps;
         this.frameTimer = 0;
-        this.speed = 7;
+        this.speed = 6;
         this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this),];
         this.currentState = this.states[0];
         this.currentState.enter();
@@ -32,10 +32,10 @@ export class Player {
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
 
-        if (input.includes('d') && this.position.x < 450) { 
+        if (input.includes('d') && this.position.x < 550) { 
             this.velocity.x = this.speed; 
         } else if ((input.includes('a') && this.position.x > 100) || 
-                    (input.includes('a') && this.scrollOffset === 0 && this.position.x > 0)) { 
+                (input.includes('a') && this.scrollOffset === 0 && this.position.x > 0)) { 
             this.velocity.x = -this.speed; 
         } else {
             this.velocity.x = 0;
@@ -58,7 +58,8 @@ export class Player {
         }
     }
     draw(context) {
-        context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height)
+        context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height);
+        context.strokeRect(this.position.x, this.position.y, this.width / 1.5, this.height);
     }
     onGround() {
         return this.position.y >= this.game.height - this.height;

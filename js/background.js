@@ -35,9 +35,9 @@ export class Background {
         this.layer1image = './../img/layers/clouds.png';
         this.layer2image = './../img/layers/town.png';
         this.layer3image = './../img/layers/buildings.png';
-        this.layer1 = new Layer(this.game, this.game.width, this.game.height, 1, this.layer1image);
-        this.layer2 = new Layer(this.game, this.game.width, this.game.height, 2, this.layer2image);
-        this.layer3 = new Layer(this.game, this.width, this.game.height, 3, this.layer3image);
+        this.layer1 = new Layer(this.game, this.game.width, this.game.height, 2, this.layer1image);
+        this.layer2 = new Layer(this.game, this.game.width, this.game.height, 3, this.layer2image);
+        this.layer3 = new Layer(this.game, this.width, this.game.height, 4, this.layer3image);
         this.backgroundLayers = [this.layer1, this.layer2, this.layer3];
     }
     update(input) {
