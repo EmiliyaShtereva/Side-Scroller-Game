@@ -40,6 +40,11 @@ window.addEventListener('load', function () {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         game.update(deltaTime);
         game.draw(ctx);
+        if (game.player.position.y > game.height) {
+            game.ground.init();
+            game.background.init();
+            game.player.init();
+        };
         requestAnimationFrame(animate);
     }
     animate(0);

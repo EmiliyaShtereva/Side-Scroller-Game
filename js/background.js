@@ -25,6 +25,12 @@ class Layer {
         image.src = imageSrc;
         return this.image = image;
     }
+    init() {
+        this.position = {
+            x: 0,
+            y: 0
+        }
+    }
 }
 
 export class Background {
@@ -48,6 +54,11 @@ export class Background {
     draw(context) {
         this.backgroundLayers.forEach(layer => {
             layer.draw(context);
+        })
+    }
+    init() {
+        this.backgroundLayers.forEach(layer => {
+            layer.init();
         })
     }
 }

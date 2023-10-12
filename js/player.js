@@ -7,7 +7,7 @@ export class Player {
         this.height = 66;
         this.position = {
             x: 200,
-            y: this.game.height - this.height
+            y: 200
         };
         this.velocity = {
             x: 0,
@@ -46,7 +46,6 @@ export class Player {
 
         // vertical movement
         if (!this.onGround()) this.velocity.y += this.weight;
-        else this.velocity.y = 0;
 
         // sprite animation
         if (this.frameTimer > this.frameInterval) {
@@ -72,5 +71,18 @@ export class Player {
     setState(state) {
         this.currentState = this.states[state];
         this.currentState.enter();
+    }
+    init() {
+        this.width;
+        this.height = 66;
+        this.position = {
+            x: 200,
+            y: 200
+        };
+        this.velocity = {
+            x: 0,
+            y: 0
+        }
+        this.scrollOffset = 0;
     }
 }

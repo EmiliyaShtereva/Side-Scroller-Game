@@ -39,19 +39,25 @@ export class Ground {
         this.height = 31;
         this.ground1 = './../img/layers/ground.png';
 
-        this.backgroundLayers = [
+        this.groundLayers = [
             new PLatforms(this.game, this.width, this.height, this.ground1, {x: 0, y: this.game.height - this.height}),
-            new PLatforms(this.game, this.width, this.height, this.ground1, {x: this.width, y: this.game.height - this.height}),
+            new PLatforms(this.game, this.width, this.height, this.ground1, {x: this.width * 2, y: this.game.height - this.height}),
         ];
     }
     update(input) {
-        this.backgroundLayers.forEach(layer => {
+        this.groundLayers.forEach(layer => {
             layer.update(input);
         })
     }
     draw(context) {
-        this.backgroundLayers.forEach(layer => {
+        this.groundLayers.forEach(layer => {
             layer.draw(context);
         })
+    }
+    init() {
+        this.groundLayers = [
+            new PLatforms(this.game, this.width, this.height, this.ground1, {x: 0, y: this.game.height - this.height}),
+            new PLatforms(this.game, this.width, this.height, this.ground1, {x: this.width * 2, y: this.game.height - this.height}),
+        ];
     }
 }
