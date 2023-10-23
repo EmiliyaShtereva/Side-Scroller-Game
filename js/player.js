@@ -58,7 +58,10 @@ export class Player {
     }
     draw(context) {
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height);
-        context.strokeRect(this.position.x, this.position.y, this.width / 1.5, this.height);
+        // context.strokeRect(this.position.x, this.position.y, 1, 1);
+        context.beginPath();
+        context.arc(this.position.x + this.width/2.7, this.position.y + this.height/2, this.width/2.7, 0, Math.PI * 2);
+        context.stroke();
     }
     onGround() {
         return this.position.y >= this.game.height - this.height;
