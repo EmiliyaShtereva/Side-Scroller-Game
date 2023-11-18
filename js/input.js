@@ -2,6 +2,7 @@ export class InputHandler {
     constructor() {
         this.keys = [];
         window.addEventListener('keydown', e => {
+            console.log(e.key);
             if ((
                 e.key === 'w' ||
                 e.key === 's' ||
