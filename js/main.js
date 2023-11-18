@@ -18,34 +18,66 @@ window.addEventListener('load', function () {
             this.ground = new Ground(this);
             this.player = new Player(this);
             this.input = new InputHandler();
-            this.demon = new Demon(this);
-            this.fireSkull = new FireSkull(this); 
-            this.ghost = new Ghost(this);
-            this.hellHound = new HellHound(this);
-            this.nightmare = new Nightmare(this);
-            
+            this.enemies = [
+                new Demon(this, { x: this.ground.groundWidth * 2 + 210, y: this.height - this.ground.groundHeight - 180 - 5 }),
+                new Demon(this, { x: this.ground.groundWidth * 7 - 200, y: this.height - this.ground.groundHeight - 180 - 5 }),
+                new Demon(this, { x: this.ground.groundWidth * 12 + 200, y: this.height - this.ground.groundHeight - 180 - 70 }),
+                new FireSkull(this, { x: this.ground.groundWidth + 210, y: this.height - 250 }),
+                new FireSkull(this, { x: this.ground.groundWidth * 3 + 420, y: this.height - 400 }),
+                new FireSkull(this, { x: this.ground.groundWidth * 8 + 750, y: this.height - 400 }),
+                new Ghost(this, { x: this.ground.groundWidth - 64, y: this.height - this.ground.groundHeight - 80 }),
+                new Ghost(this, { x: this.ground.groundWidth * 3 + 100, y: this.height - 100 - 80 }),
+                new Ghost(this, { x: this.ground.groundWidth * 5 + 470, y: this.height - 270 - 80 }),
+                new Ghost(this, { x: this.ground.groundWidth * 10 + 150, y: this.height - this.ground.highgroundHeight - 80 }),
+                new Ghost(this, { x: this.ground.groundWidth * 14 + 360, y: this.height - 200 - 80 }),
+                new HellHound(this, { x: (this.ground.groundWidth * 9 - 50) + this.ground.groundWidth - 64, y: this.height - this.ground.groundHeight - 32 }),
+                new HellHound(this, { x: this.ground.groundWidth * 11 + 450, y: this.height - this.ground.groundHeight - 32 }),
+                new HellHound(this, { x: this.ground.groundWidth * 13 + 300, y: this.height - this.ground.highgroundHeight - 32 }),
+                new Nightmare(this, { x: this.ground.groundWidth * 4 + 250, y: this.height - this.ground.groundHeight - 96 }),
+                new Nightmare(this, { x: this.ground.groundWidth * 7 + 600, y: this.height - this.ground.groundHeight - 96 }),
+                new Nightmare(this, { x: this.ground.groundWidth * 11 + 200, y: this.height - this.ground.groundHeight - 96 }),
+                new Nightmare(this, { x: this.ground.groundWidth * 16 + 300, y: this.height - this.ground.groundHeight - 96 }),
+            ]
             this.gameOver = false;
         }
         update(deltaTime) {
             this.background.update(this.input.keys);
             this.ground.update(this.input.keys);
             this.player.update(this.input.keys, deltaTime);
-            this.demon.update(this.input.keys, deltaTime);
-            this.fireSkull.update(this.input.keys, deltaTime);
-            this.ghost.update(this.input.keys, deltaTime);
-            this.hellHound.update(this.input.keys, deltaTime);
-            this.nightmare.update(this.input.keys, deltaTime);
-
+            this.enemies.forEach(enemy => {
+                enemy.update(this.input.keys, deltaTime);
+                if (enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
+            });
         }
         draw(context) {
             this.background.draw(context);
             this.ground.draw(context);
             this.player.draw(context);
-            this.demon.draw(context);
-            this.fireSkull.draw(context);
-            this.ghost.draw(context);
-            this.hellHound.draw(context);
-            this.nightmare.draw(context);
+            this.enemies.forEach(enemy => {
+                enemy.draw(context);
+            });
+        }
+        init() {
+            this.enemies = [
+                new Demon(this, { x: this.ground.groundWidth * 2 + 210, y: this.height - this.ground.groundHeight - 180 - 5 }),
+                new Demon(this, { x: this.ground.groundWidth * 7 - 200, y: this.height - this.ground.groundHeight - 180 - 5 }),
+                new Demon(this, { x: this.ground.groundWidth * 12 + 200, y: this.height - this.ground.groundHeight - 180 - 70 }),
+                new FireSkull(this, { x: this.ground.groundWidth + 210, y: this.height - 250 }),
+                new FireSkull(this, { x: this.ground.groundWidth * 3 + 420, y: this.height - 400 }),
+                new FireSkull(this, { x: this.ground.groundWidth * 8 + 750, y: this.height - 400 }),
+                new Ghost(this, { x: this.ground.groundWidth - 64, y: this.height - this.ground.groundHeight - 80 }),
+                new Ghost(this, { x: this.ground.groundWidth * 3 + 100, y: this.height - 100 - 80 }),
+                new Ghost(this, { x: this.ground.groundWidth * 5 + 470, y: this.height - 270 - 80 }),
+                new Ghost(this, { x: this.ground.groundWidth * 10 + 150, y: this.height - this.ground.highgroundHeight - 80 }),
+                new Ghost(this, { x: this.ground.groundWidth * 14 + 360, y: this.height - 200 - 80 }),
+                new HellHound(this, { x: (this.ground.groundWidth * 9 - 50) + this.ground.groundWidth - 64, y: this.height - this.ground.groundHeight - 32 }),
+                new HellHound(this, { x: this.ground.groundWidth * 11 + 450, y: this.height - this.ground.groundHeight - 32 }),
+                new HellHound(this, { x: this.ground.groundWidth * 13 + 300, y: this.height - this.ground.highgroundHeight - 32 }),
+                new Nightmare(this, { x: this.ground.groundWidth * 4 + 250, y: this.height - this.ground.groundHeight - 96 }),
+                new Nightmare(this, { x: this.ground.groundWidth * 7 + 600, y: this.height - this.ground.groundHeight - 96 }),
+                new Nightmare(this, { x: this.ground.groundWidth * 11 + 200, y: this.height - this.ground.groundHeight - 96 }),
+                new Nightmare(this, { x: this.ground.groundWidth * 16 + 300, y: this.height - this.ground.groundHeight - 96 }),
+            ]
         }
     }
 
@@ -63,13 +95,9 @@ window.addEventListener('load', function () {
             game.ground.init();
             game.background.init();
             game.player.init();
-            game.demon.init();
-            game.fireSkull.init();
-            game.ghost.init();
-            game.hellHound.init();
-            game.nightmare.init();
+            game.init();
         };
-        if(!game.gameOver) requestAnimationFrame(animate);
+        if (!game.gameOver) requestAnimationFrame(animate);
     }
     animate(0);
 });
