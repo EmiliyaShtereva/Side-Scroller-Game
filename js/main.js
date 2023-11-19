@@ -3,6 +3,7 @@ import { InputHandler } from "./input.js";
 import { Background } from "./background.js";
 import { Ground } from "./platforms.js";
 import { Demon, FireSkull, Ghost, HellHound, Nightmare } from "./enemies.js";
+import { UI } from "./UI.js";
 
 window.addEventListener('load', function () {
     const canvas = document.getElementById('canvas1');
@@ -18,6 +19,7 @@ window.addEventListener('load', function () {
             this.ground = new Ground(this);
             this.player = new Player(this);
             this.input = new InputHandler();
+            this.UI = new UI(this);
             this.enemies = [
                 new Demon(this, { x: this.ground.groundWidth * 2 + 210, y: this.height - this.ground.groundHeight - 180 - 5 }),
                 new Demon(this, { x: this.ground.groundWidth * 7 - 200, y: this.height - this.ground.groundHeight - 180 - 5 }),
@@ -39,6 +41,7 @@ window.addEventListener('load', function () {
                 new Nightmare(this, { x: this.ground.groundWidth * 16 + 300, y: this.height - this.ground.groundHeight - 96 }),
             ]
             this.gameOver = false;
+            this.fontColor = 'black';
         }
         update(deltaTime) {
             this.background.update(this.input.keys);
@@ -48,6 +51,7 @@ window.addEventListener('load', function () {
                 enemy.update(this.input.keys, deltaTime);
                 if (enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
             });
+            this.UI.update(this.input.keys);
         }
         draw(context) {
             this.background.draw(context);
@@ -56,6 +60,7 @@ window.addEventListener('load', function () {
             this.enemies.forEach(enemy => {
                 enemy.draw(context);
             });
+            this.UI.draw(context);
         }
         init() {
             this.enemies = [
@@ -96,6 +101,7 @@ window.addEventListener('load', function () {
             game.background.init();
             game.player.init();
             game.init();
+            game.UI.init();
         };
         if (!game.gameOver) requestAnimationFrame(animate);
     }
