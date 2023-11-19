@@ -1,10 +1,10 @@
-import { Sitting, Running, Jumping, Falling, RunningLeft, FallingLeft, JumpingLeft } from "./playerStates.js";
+import { Sitting, Running, Jumping, Falling, RunningLeft, FallingLeft, JumpingLeft, Attack, SittingLeft, AttackLeft } from "./playerStates.js";
 
 export class Player {
     constructor(game) {
         this.game = game;
         this.width;
-        this.height = 66;
+        // this.height = 0;
         this.position = {
             x: 200,
             y: 200
@@ -22,7 +22,7 @@ export class Player {
         this.frameInterval = 1000 / this.fps;
         this.frameTimer = 0;
         this.speed = 6;
-        this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this), new RunningLeft(this), new FallingLeft(this), new JumpingLeft(this)];
+        this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this), new Attack(this), new SittingLeft(this), new RunningLeft(this), new JumpingLeft(this), new FallingLeft(this), new AttackLeft(this)];
         this.currentState = this.states[0];
         this.currentState.enter();
     }
@@ -58,8 +58,9 @@ export class Player {
     }
     draw(context) {
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height);
+        // context.strokeRect(this.position.x, this.position.y, this.width, this.height)
         // context.beginPath();
-        // context.arc(this.position.x + this.width/2.7, this.position.y + this.height/2, this.width/2.7, 0, Math.PI * 2);
+        // context.arc(this.position.x + this.width/2.7, this.position.y + this.height/1.5, this.width/2.7, 0, Math.PI * 2);
         // context.stroke();
     }
     onGround() {

@@ -48,7 +48,7 @@ export class Demon extends Enemy{
         }
         this.devider1 = 2.7;
         this.devider2 = 1.6;
-        this.devider3 = 2;
+        this.devider3 = 1.7;
         this.devider4 = 1.5;
         this.devider5 = 5;
         this.devider6 = 2;
@@ -86,7 +86,7 @@ export class FireSkull extends Enemy {
         }
         this.devider1 = 2.7;
         this.devider2 = 2.2;
-        this.devider3 = 2;
+        this.devider3 = 1.7;
         this.devider4 = 1.6;
         this.devider5 = 6;
         this.devider6 = 2.5;
@@ -114,7 +114,7 @@ export class Ghost extends Enemy {
         }
         this.devider1 = 2.7;
         this.devider2 = 2;
-        this.devider3 = 2;
+        this.devider3 = 1.7;
         this.devider4 = 2;
         this.devider5 = 6;
         this.devider6 = 4;
@@ -142,7 +142,7 @@ export class HellHound extends Enemy {
         }
         this.devider1 = 2.7;
         this.devider2 = 1.7;
-        this.devider3 = 2;
+        this.devider3 = 1.7;
         this.devider4 = 1.5;
         this.devider5 = 4.5;
         this.devider6 = 2.7;
@@ -170,7 +170,7 @@ export class Nightmare extends Enemy {
         }
         this.devider1 = 2.7;
         this.devider2 = 2;
-        this.devider3 = 2;
+        this.devider3 = 1.7;
         this.devider4 = 1.2;
         this.devider5 = 3;
         this.devider6 = 2.7;
