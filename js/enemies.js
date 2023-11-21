@@ -20,15 +20,19 @@ class Enemy {
         const dy = (this.game.player.position.y + this.game.player.height / this.devider3) - (this.position.y + this.height / this.devider4);
         const distance = Math.sqrt(dx * dx + dy * dy);
         if (distance < this.width / this.devider5 + this.game.player.width / this.devider6) {
+            if (this.game.player.currentState === this.game.player.states[4] || this.game.player.currentState === this.game.player.states[9]) {
+                this.markedForDeletion = true;
+            } else {
+                this.game.gameOver = true;
+            }
             // this.game.gameOver = true;
-            this.markedForDeletion = true;
         }
     }
     draw(context) {
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height);
-        // context.beginPath();
-        // context.arc(this.position.x + this.width/2, this.position.y + this.height/1.2, this.width/3, 0, Math.PI * 2);
-        // context.stroke();
+        context.beginPath();
+        context.arc(this.position.x + this.width/this.devider2, this.position.y + this.height/this.devider4, this.width/this.devider5, 0, Math.PI * 2);
+        context.stroke();
     }
 }
 
@@ -51,7 +55,7 @@ export class Demon extends Enemy{
         this.devider3 = 1.7;
         this.devider4 = 1.5;
         this.devider5 = 5;
-        this.devider6 = 2;
+        this.devider6 = 2.3;
     }
     createImage(imageSrc) {
         const image = new Image();
@@ -64,8 +68,8 @@ export class Demon extends Enemy{
         const flameDy = (this.game.player.position.y + this.game.player.height / 2) - (this.position.y + this.height / 1.2);
         const flameDistance = Math.sqrt(flameDx * flameDx + flameDy * flameDy);
         if ((this.frameX > 6 && flameDistance < this.width / 6 + this.game.player.width / 2)) {
-            // this.game.gameOver = true;
-            this.markedForDeletion = true;
+            this.game.gameOver = true;
+            // this.markedForDeletion = true;
         }
     }
 }
@@ -89,7 +93,7 @@ export class FireSkull extends Enemy {
         this.devider3 = 1.7;
         this.devider4 = 1.6;
         this.devider5 = 6;
-        this.devider6 = 2.5;
+        this.devider6 = 2.3;
     }
     createImage(imageSrc) {
         const image = new Image();
@@ -117,7 +121,7 @@ export class Ghost extends Enemy {
         this.devider3 = 1.7;
         this.devider4 = 2;
         this.devider5 = 6;
-        this.devider6 = 4;
+        this.devider6 = 2.5;
     }
     createImage(imageSrc) {
         const image = new Image();
@@ -145,7 +149,7 @@ export class HellHound extends Enemy {
         this.devider3 = 1.7;
         this.devider4 = 1.5;
         this.devider5 = 4.5;
-        this.devider6 = 2.7;
+        this.devider6 = 2.3;
     }
     createImage(imageSrc) {
         const image = new Image();
@@ -173,7 +177,7 @@ export class Nightmare extends Enemy {
         this.devider3 = 1.7;
         this.devider4 = 1.2;
         this.devider5 = 3;
-        this.devider6 = 2.7;
+        this.devider6 = 2.3;
     }
     createImage(imageSrc) {
         const image = new Image();

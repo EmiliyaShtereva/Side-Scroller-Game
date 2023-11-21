@@ -60,6 +60,8 @@ export class Running extends State {
             this.player.setState(states.JUMPING);
         } else if (input.includes('w') && input.includes('a')) {
             this.player.setState(states.JUMPINGLEFT);
+        } else if (input.includes('Enter')) {
+            this.player.setState(states.ATTACK);
         } else if (!input.includes('a') && !input.includes('d')) {
             this.player.setState(states.SITTING);
         }
@@ -87,6 +89,8 @@ export class Jumping extends State {
             this.player.setState(states.FALLINGLEFT);
         } else if (!this.player.onGround() && this.player.velocity.y === 0 && input.includes('a')) {
             this.player.setState(states.FALLINGLEFT);
+        } else if (input.includes('Enter')) {
+            this.player.setState(states.ATTACK);
         } else if (this.player.velocity.y === 0) {
             this.player.setState(states.SITTING);
         }
@@ -105,9 +109,11 @@ export class Falling extends State {
         this.player.height = 76;
         this.player.maxFrame = 0;
     }
-    handleInput() {
+    handleInput(input) {
         if (this.player.onGround() || this.player.velocity.y === 0) {
             this.player.setState(states.SITTING);
+        } else if (input.includes('Enter')) {
+            this.player.setState(states.ATTACK);
         }
     }
 }
@@ -172,6 +178,8 @@ export class RunningLeft extends State {
             this.player.setState(states.JUMPING);
         } else if (input.includes('w') && input.includes('a')) {
             this.player.setState(states.JUMPINGLEFT);
+        } else if (input.includes('Enter')) {
+            this.player.setState(states.ATTACKLEFT);
         } else if (!input.includes('a') && !input.includes('d')) {
             this.player.setState(states.SITTINGLEFT);
         } 
@@ -190,10 +198,12 @@ export class FallingLeft extends State {
         this.player.height = 76;
         this.player.maxFrame = 0;
     }
-    handleInput() {
+    handleInput(input) {
         if (this.player.onGround() || this.player.velocity.y === 0) {
             this.player.setState(states.SITTINGLEFT);
-        } 
+        } else if (input.includes('Enter')) {
+            this.player.setState(states.ATTACKLEFT);
+        }
     }
 }
 
@@ -218,6 +228,8 @@ export class JumpingLeft extends State {
             this.player.setState(states.FALLINGLEFT);
         } else if (!this.player.onGround() && this.player.velocity.y === 0 && input.includes('a')) {
             this.player.setState(states.FALLINGLEFT);
+        } else if (input.includes('Enter')) {
+            this.player.setState(states.ATTACKLEFT);
         } else if (this.player.velocity.y === 0) {
             this.player.setState(states.SITTINGLEFT);
         }

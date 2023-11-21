@@ -14,14 +14,14 @@ export class Player {
             y: 0
         }
         this.scrollOffset = 0;
-        this.weight = 1.5;
+        this.weight = 1.3;
         this.image;
         this.frameX = 0;
         this.maxFrame;
         this.fps = 15;
         this.frameInterval = 1000 / this.fps;
         this.frameTimer = 0;
-        this.speed = 6;
+        this.speed = 5.5;
         this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this), new Attack(this), new SittingLeft(this), new RunningLeft(this), new JumpingLeft(this), new FallingLeft(this), new AttackLeft(this)];
         this.currentState = this.states[0];
         this.currentState.enter();
@@ -59,9 +59,9 @@ export class Player {
     draw(context) {
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height);
         // context.strokeRect(this.position.x, this.position.y, this.width, this.height)
-        // context.beginPath();
-        // context.arc(this.position.x + this.width/2.7, this.position.y + this.height/1.5, this.width/2.7, 0, Math.PI * 2);
-        // context.stroke();
+        context.beginPath();
+        context.arc(this.position.x + this.width/2.7, this.position.y + this.height/1.7, this.width/2.3, 0, Math.PI * 2);
+        context.stroke();
     }
     onGround() {
         return this.position.y >= this.game.height - this.height;
@@ -77,7 +77,7 @@ export class Player {
     }
     init() {
         this.width;
-        this.height = 66;
+        this.height = 76;
         this.position = {
             x: 200,
             y: 200

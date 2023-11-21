@@ -96,14 +96,15 @@ window.addEventListener('load', function () {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         game.update(deltaTime);
         game.draw(ctx);
-        if (game.player.position.y > game.height) {
+        if (game.player.position.y > game.height || game.gameOver === true) {
             game.ground.init();
             game.background.init();
             game.player.init();
             game.init();
             game.UI.init();
+            game.gameOver = false;
         };
-        if (!game.gameOver) requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
     }
     animate(0);
 });

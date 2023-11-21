@@ -17,6 +17,7 @@ class Layer {
         else if (input.includes('a') && this.game.player.scrollOffset > 0) this.position.x += this.speedModifier;
     }
     draw(context) {
+        context.drawImage(this.image, this.position.x - this.width, this.position.y, this.width, this.height);
         context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
         context.drawImage(this.image, this.position.x + this.width, this.position.y, this.width, this.height);
     }
