@@ -62,6 +62,8 @@ export class Running extends State {
             this.player.setState(states.JUMPINGLEFT);
         } else if (input.includes('Enter')) {
             this.player.setState(states.ATTACK);
+        } else if (input.includes('a')) {
+            this.player.setState(states.RUNNINGLEFT);
         } else if (!input.includes('a') && !input.includes('d')) {
             this.player.setState(states.SITTING);
         }
@@ -180,6 +182,8 @@ export class RunningLeft extends State {
             this.player.setState(states.JUMPINGLEFT);
         } else if (input.includes('Enter')) {
             this.player.setState(states.ATTACKLEFT);
+        } else if (input.includes('d')) {
+            this.player.setState(states.RUNNING);
         } else if (!input.includes('a') && !input.includes('d')) {
             this.player.setState(states.SITTINGLEFT);
         } 

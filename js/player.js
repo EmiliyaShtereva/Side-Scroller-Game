@@ -58,14 +58,9 @@ export class Player {
         if (this.scrollOffset >= 11550) {
             this.game.gameWin = true;
         }
-        // console.log(this.scrollOffset);
     }
     draw(context) {
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height);
-        // context.strokeRect(this.position.x, this.position.y, this.width, this.height)
-        context.beginPath();
-        context.arc(this.position.x + this.width/2.7, this.position.y + this.height/1.7, this.width/2.3, 0, Math.PI * 2);
-        context.stroke();
     }
     onGround() {
         return this.position.y >= this.game.height - this.height;

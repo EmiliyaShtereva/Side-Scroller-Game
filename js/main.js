@@ -4,6 +4,7 @@ import { Background } from "./background.js";
 import { Ground } from "./platforms.js";
 import { Demon, FireSkull, Ghost, HellHound, Nightmare } from "./enemies.js";
 import { UI } from "./UI.js";
+import { Crow } from "./crow.js";
 
 window.addEventListener('load', function () {
     const canvas = document.getElementById('canvas1');
@@ -20,6 +21,7 @@ window.addEventListener('load', function () {
             this.player = new Player(this);
             this.input = new InputHandler();
             this.UI = new UI(this);
+            this.crow = new Crow(this);
             this.enemies = [
                 new Demon(this, { x: this.ground.groundWidth * 2 + 210, y: this.height - this.ground.groundHeight - 180 - 5 }),
                 new Demon(this, { x: this.ground.groundWidth * 7 - 200, y: this.height - this.ground.groundHeight - 180 - 5 }),
@@ -51,6 +53,7 @@ window.addEventListener('load', function () {
             this.background.update(this.input.keys);
             this.ground.update(this.input.keys);
             this.player.update(this.input.keys, deltaTime);
+            this.crow.update(this.input.keys, deltaTime);
             this.enemies.forEach(enemy => {
                 enemy.update(this.input.keys, deltaTime);
                 if (enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
@@ -65,6 +68,7 @@ window.addEventListener('load', function () {
             this.background.draw(context);
             this.ground.draw(context);
             this.player.draw(context);
+            this.crow.draw(context);
             this.enemies.forEach(enemy => {
                 enemy.draw(context);
             });
@@ -115,6 +119,7 @@ window.addEventListener('load', function () {
             game.player.init();
             game.init();
             game.UI.init();
+            game.crow.init();
             game.gameOver = false;
         };
         if(!game.gameWin) requestAnimationFrame(animate);

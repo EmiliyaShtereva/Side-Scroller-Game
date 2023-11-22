@@ -26,16 +26,12 @@ class Enemy {
                 this.markedForDeletion = true;
                 this.game.collisions.push(new CollisionAnimation(this.game, {x: this.position.x + this.width * 0.5, y: this.position.y + this.height * 0.5}));
             } else {
-                // this.game.gameOver = true;
+                this.game.gameOver = true;
             }
-            // this.game.gameOver = true;
         }
     }
     draw(context) {
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.position.x, this.position.y, this.width, this.height);
-        context.beginPath();
-        context.arc(this.position.x + this.width/this.devider2, this.position.y + this.height/this.devider4, this.width/this.devider5, 0, Math.PI * 2);
-        context.stroke();
     }
 }
 
@@ -71,8 +67,7 @@ export class Demon extends Enemy{
         const flameDy = (this.game.player.position.y + this.game.player.height / 2) - (this.position.y + this.height / 1.2);
         const flameDistance = Math.sqrt(flameDx * flameDx + flameDy * flameDy);
         if ((this.frameX > 6 && flameDistance < this.width / 6 + this.game.player.width / 2)) {
-            // this.game.gameOver = true;
-            // this.markedForDeletion = true;
+            this.game.gameOver = true;
         }
     }
 }
