@@ -23,10 +23,12 @@ window.addEventListener('load', function () {
             this.enemies = [
                 new Demon(this, { x: this.ground.groundWidth * 2 + 210, y: this.height - this.ground.groundHeight - 180 - 5 }),
                 new Demon(this, { x: this.ground.groundWidth * 7 - 200, y: this.height - this.ground.groundHeight - 180 - 5 }),
-                new Demon(this, { x: this.ground.groundWidth * 12 + 200, y: this.height - this.ground.groundHeight - 180 - 70 }),
+                new Demon(this, { x: this.ground.groundWidth * 12 + 200, y: this.height - this.ground.groundHeight - 180 - 15 }),
+                new Demon(this, { x: this.ground.groundWidth * 20 + 170, y: this.height - this.ground.groundHeight - 180 - 15 }),
                 new FireSkull(this, { x: this.ground.groundWidth + 210, y: this.height - 250 }),
                 new FireSkull(this, { x: this.ground.groundWidth * 3 + 420, y: this.height - 400 }),
                 new FireSkull(this, { x: this.ground.groundWidth * 8 + 750, y: this.height - 400 }),
+                new FireSkull(this, { x: this.ground.groundWidth * 18 + 50, y: this.height - 450 }),
                 new Ghost(this, { x: this.ground.groundWidth - 64, y: this.height - this.ground.groundHeight - 80 }),
                 new Ghost(this, { x: this.ground.groundWidth * 3 + 100, y: this.height - 100 - 80 }),
                 new Ghost(this, { x: this.ground.groundWidth * 5 + 470, y: this.height - 270 - 80 }),
@@ -40,6 +42,7 @@ window.addEventListener('load', function () {
                 new Nightmare(this, { x: this.ground.groundWidth * 11 + 200, y: this.height - this.ground.groundHeight - 96 }),
                 new Nightmare(this, { x: this.ground.groundWidth * 16 + 300, y: this.height - this.ground.groundHeight - 96 }),
             ]
+            this.collisions = [];
             this.gameOver = false;
             this.fontColor = 'black';
         }
@@ -51,6 +54,10 @@ window.addEventListener('load', function () {
                 enemy.update(this.input.keys, deltaTime);
                 if (enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
             });
+            this.collisions.forEach((collision, index) => {
+                collision.update(this.input.keys, deltaTime);
+                if (collision.markedForDeletion) this.collisions.splice(index, 1);
+            });
             this.UI.update(this.input.keys);
         }
         draw(context) {
@@ -60,16 +67,21 @@ window.addEventListener('load', function () {
             this.enemies.forEach(enemy => {
                 enemy.draw(context);
             });
+            this.collisions.forEach(collision => {
+                collision.draw(context);
+            });
             this.UI.draw(context);
         }
         init() {
             this.enemies = [
                 new Demon(this, { x: this.ground.groundWidth * 2 + 210, y: this.height - this.ground.groundHeight - 180 - 5 }),
                 new Demon(this, { x: this.ground.groundWidth * 7 - 200, y: this.height - this.ground.groundHeight - 180 - 5 }),
-                new Demon(this, { x: this.ground.groundWidth * 12 + 200, y: this.height - this.ground.groundHeight - 180 - 70 }),
+                new Demon(this, { x: this.ground.groundWidth * 12 + 200, y: this.height - this.ground.groundHeight - 180 - 15 }),
+                new Demon(this, { x: this.ground.groundWidth * 20 + 170, y: this.height - this.ground.groundHeight - 180 - 15 }),
                 new FireSkull(this, { x: this.ground.groundWidth + 210, y: this.height - 250 }),
                 new FireSkull(this, { x: this.ground.groundWidth * 3 + 420, y: this.height - 400 }),
                 new FireSkull(this, { x: this.ground.groundWidth * 8 + 750, y: this.height - 400 }),
+                new FireSkull(this, { x: this.ground.groundWidth * 18 + 50, y: this.height - 450 }),
                 new Ghost(this, { x: this.ground.groundWidth - 64, y: this.height - this.ground.groundHeight - 80 }),
                 new Ghost(this, { x: this.ground.groundWidth * 3 + 100, y: this.height - 100 - 80 }),
                 new Ghost(this, { x: this.ground.groundWidth * 5 + 470, y: this.height - 270 - 80 }),

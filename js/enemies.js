@@ -1,3 +1,5 @@
+import { CollisionAnimation } from "./collisionAnimation.js";
+
 class Enemy {
     constructor() {
         this.frameX = 0;
@@ -22,8 +24,9 @@ class Enemy {
         if (distance < this.width / this.devider5 + this.game.player.width / this.devider6) {
             if (this.game.player.currentState === this.game.player.states[4] || this.game.player.currentState === this.game.player.states[9]) {
                 this.markedForDeletion = true;
+                this.game.collisions.push(new CollisionAnimation(this.game, {x: this.position.x + this.width * 0.5, y: this.position.y + this.height * 0.5}));
             } else {
-                this.game.gameOver = true;
+                // this.game.gameOver = true;
             }
             // this.game.gameOver = true;
         }
@@ -68,7 +71,7 @@ export class Demon extends Enemy{
         const flameDy = (this.game.player.position.y + this.game.player.height / 2) - (this.position.y + this.height / 1.2);
         const flameDistance = Math.sqrt(flameDx * flameDx + flameDy * flameDy);
         if ((this.frameX > 6 && flameDistance < this.width / 6 + this.game.player.width / 2)) {
-            this.game.gameOver = true;
+            // this.game.gameOver = true;
             // this.markedForDeletion = true;
         }
     }
@@ -92,7 +95,7 @@ export class FireSkull extends Enemy {
         this.devider2 = 2.2;
         this.devider3 = 1.7;
         this.devider4 = 1.6;
-        this.devider5 = 6;
+        this.devider5 = 4.5;
         this.devider6 = 2.3;
     }
     createImage(imageSrc) {
@@ -145,10 +148,10 @@ export class HellHound extends Enemy {
             y
         }
         this.devider1 = 2.7;
-        this.devider2 = 1.7;
+        this.devider2 = 2;
         this.devider3 = 1.7;
         this.devider4 = 1.5;
-        this.devider5 = 4.5;
+        this.devider5 = 5.5;
         this.devider6 = 2.3;
     }
     createImage(imageSrc) {
@@ -173,10 +176,10 @@ export class Nightmare extends Enemy {
             y
         }
         this.devider1 = 2.7;
-        this.devider2 = 2;
+        this.devider2 = 2.7;
         this.devider3 = 1.7;
         this.devider4 = 1.2;
-        this.devider5 = 3;
+        this.devider5 = 4;
         this.devider6 = 2.3;
     }
     createImage(imageSrc) {

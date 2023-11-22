@@ -4,7 +4,6 @@ export class Player {
     constructor(game) {
         this.game = game;
         this.width;
-        // this.height = 0;
         this.position = {
             x: 200,
             y: 200
