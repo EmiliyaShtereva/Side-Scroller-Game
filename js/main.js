@@ -44,6 +44,7 @@ window.addEventListener('load', function () {
             ]
             this.collisions = [];
             this.gameOver = false;
+            this.gameWin = false;
             this.fontColor = 'black';
         }
         update(deltaTime) {
@@ -116,7 +117,7 @@ window.addEventListener('load', function () {
             game.UI.init();
             game.gameOver = false;
         };
-        requestAnimationFrame(animate);
+        if(!game.gameWin) requestAnimationFrame(animate);
     }
     animate(0);
 });
