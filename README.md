@@ -7,7 +7,6 @@ A vanilla JavaScript project for a mini-game.
 
 - [Setup](#setup)
 - [Technologies Used](#technologies-used)
-- [Backend](#backend)
 - [Resources](#resources)
 - [Architecture and Directories](#architecture-and-directories)
 - [License](#license)
@@ -19,9 +18,6 @@ There are no additional setups for this project.
 
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) & [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-
-## Backend
-There is no backend everything is stored locally on your machine.
 
 ## Resources
 - [Crow sprite sheet](https://smithygames.itch.io/crow-sprite)
